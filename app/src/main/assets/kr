@@ -1,0 +1,28 @@
+kill com.pubg.krmobile
+clear
+rm -rf /data/data/com.pubg.krmobile/shared_prefs
+mkdir /data/data/com.pubg.krmobile/shared_prefs
+chmod 777 /data/data/com.pubg.krmobile/shared_prefs
+rm -rf /data/data/com.pubg.krmobile/files
+
+GUEST="/data/data/com.pubg.krmobile/shared_prefs/device_id.xml"
+rm -rf $GUEST
+echo "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <string name=\"random\"></string>
+    <string name=\"install\"></string>
+    <string name=\"uuid\">$RANDOM$RANDOM-$RANDOM-$RANDOM-$RANDOM-$RANDOM$RANDOM$RANDOM</string>
+</map>" > $GUEST
+rm -rf /data/data/com.pubg.krmobile/databases
+rm -rf /data/media/0/Android/data/com.pubg.krmobile/files/login-identifier.txt
+rm -rf /data/media/0/Android/data/com.pubg.krmobile/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Intermediate
+touch /data/media/0/Android/data/com.pubg.krmobile/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Intermediate
+rm -rf /data/media/0/Android/data/com.pubg.krmobile/files/TGPA
+touch /data/media/0/Android/data/com.pubg.krmobile/files/TGPA
+rm -rf /data/media/0/Android/data/com.pubg.krmobile/files/ProgramBinaryCache
+touch /data/media/0/Android/data/com.pubg.krmobile/files/ProgramBinaryCache
+iptables -I OUTPUT -d cloud.vmp.onezapp.com -j REJECT
+iptables -I INPUT -s cloud.vmp.onezapp.com -j REJECT
+clear
+
+am start -n com.pubg.krmobile/com.epicgames.ue4.SplashActivity &>/dev/null
